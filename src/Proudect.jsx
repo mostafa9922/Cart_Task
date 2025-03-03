@@ -13,13 +13,17 @@ export const Proudect = ({
       <h1>Name : {name}</h1>
       <h1>Price : {price}</h1>
       <h1>Count : {count}</h1>
-      <button className='btn btn-success' onClick={() => increment(id)}>
+      <button
+        className='btn btn-success btn-xs md:btn-md'
+        onClick={() => increment(id)}>
         +
       </button>
-      <button className='btn btn-warning' onClick={() => decrement(id)}>
+      <button
+        className='btn btn-warning btn-xs md:btn-md'
+        onClick={() => decrement(id)}>
         -
       </button>
-      <button className='btn btn-error'>Del</button>
+      <button className='btn btn-error btn-xs md:btn-md'>Del</button>
       <h1>Total : ${count * price}</h1>
     </div>
   );
