@@ -8,7 +8,7 @@ export const Proudect = ({
     <div
       className={`flex justify-around items-center w-[90%] h-15 ${
         theme === "dark" ? "bg-blue-600" : "bg-gray-200"
-      } my-2 rounded-4xl`}>
+      } my-2 rounded-4xl text-xs md:text-base `}>
       <h1>ID : {id}</h1>
       <h1>Name : {name}</h1>
       <h1>Price : {price}</h1>
