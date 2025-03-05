@@ -1,9 +1,8 @@
-import { FaCartArrowDown } from "react-icons/fa";
-
-export const Header = () => {
+import { TiShoppingCart } from "react-icons/ti";
+export const Header = ({ products, addItem }) => {
   return (
-    <div className='h-[10vh]'>
-      <div className='navbar bg-base-100 shadow-sm'>
+    <div className='h-[10vh] w-[100vw]'>
+      <div className='navbar bg-base-100 shadow-sm w-[100%]'>
         <div className='navbar-start'>
           <div className='dropdown'>
             <div tabIndex={0} role='button' className='btn btn-ghost lg:hidden'>
@@ -44,23 +43,31 @@ export const Header = () => {
         <div className='navbar-center hidden lg:flex'>
           <ul className='menu menu-horizontal px-1'>
             <li>
-              <a>chipsy</a>
+              <a onClick={(e) => addItem(e.target.innerHTML)}>shipcy</a>
             </li>
             <li>
-              <a>pepsi</a>
+              <a onClick={(e) => addItem(e.target.innerHTML)}>pesi</a>
             </li>
             <li>
-              <a>cigartes</a>
+              <a onClick={(e) => addItem(e.target.innerHTML)}>molto</a>
             </li>
             <li>
-              <a>baneh</a>
+              <a onClick={(e) => addItem(e.target.innerHTML)}>kranshy</a>
+            </li>
+            <li>
+              <a onClick={(e) => addItem(e.target.innerHTML)}>cigaretes</a>
             </li>
           </ul>
         </div>
-        <div className='navbar-end'>
-          <a className='btn'>
-            <FaCartArrowDown />
-          </a>
+        <div className='navbar-end relative'>
+          <div className='absolute right-8'>
+            <div className='indicator'>
+              <span className='indicator-item badge badge-secondary'>
+                {products.length}
+              </span>
+              <TiShoppingCart className='  text-2xl' />
+            </div>
+          </div>
         </div>
       </div>
     </div>

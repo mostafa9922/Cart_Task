@@ -8,6 +8,8 @@ export const Cart = ({
   reset,
   changeTheme,
   theme,
+  delAll,
+  delProduct,
 }) => {
   return (
     <div className='w-full h-[90vh] h- flex justify-center items-center'>
@@ -19,12 +21,19 @@ export const Cart = ({
           <button className='btn btn-info' onClick={() => reset()}>
             Reset
           </button>
-          <button className='btn btn-error'>Delete Cart</button>
+          <button className='btn btn-error' onClick={() => delAll()}>
+            Delete Cart
+          </button>
           <button className='btn btn-sm' onClick={() => changeTheme()}>
             <MdDarkMode />
           </button>
         </div>
-        <div className='items w-[100%] flex flex-col justify-around items-center'>
+        <div
+          className={
+            products.length > 0
+              ? "items w-[100%] flex flex-col justify-around items-center"
+              : "hidden"
+          }>
           {products.map((product, index) => (
             <Proudect
               key={index}
@@ -32,16 +41,28 @@ export const Cart = ({
               increment={increment}
               decrement={decrement}
               theme={theme}
+              delProduct={delProduct}
             />
           ))}
         </div>
-        <h1 className='w-[100%] text-center text-4xl text-green-500 font-bold'>
+        <h1
+          className={
+            products.length > 0
+              ? "w-[100%] text-center text-4xl text-green-500 font-bold"
+              : "hidden"
+          }>
           Total Paid : $
           {products.reduce(
-            (acc, product) => acc + product.count * product.price,
+            (acc, product) => acc + product.items * product.price,
             0
           )}
         </h1>
+        <div
+          className={
+            products.length == 0 ? "text-4xl text-green-500" : "hidden"
+          }>
+          Cart Is Empty!
+        </div>
       </div>
     </div>
   );

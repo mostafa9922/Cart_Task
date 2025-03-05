@@ -6,30 +6,41 @@ import { NotFound } from "./NotFound";
 
 const App = () => {
   const [products, setProducts] = useState([
-    { id: 1, name: "chipsy", price: 100, count: 0 },
-    { id: 2, name: "pepsi", price: 200, count: 0 },
-    { id: 3, name: "cigarettes", price: 300, count: 0 },
-    { id: 4, name: "baneh", price: 400, count: 0 },
+    { id: 0, name: "shipcy", price: 100, items: 1 },
+    { id: 1, name: "pesi", price: 200, items: 1 },
+    { id: 2, name: "molto", price: 300, items: 1 },
+    { id: 3, name: "kranshy", price: 400, items: 1 },
+    { id: 4, name: "cigaretes", price: 500, items: 1 },
+  ]);
+
+  const [copyProducts, setcopyProducts] = useState([
+    { id: 0, name: "shipcy", price: 100, items: 1 },
+    { id: 1, name: "pesi", price: 200, items: 1 },
+    { id: 2, name: "molto", price: 300, items: 1 },
+    { id: 3, name: "kranshy", price: 400, items: 1 },
+    { id: 4, name: "cigaretes", price: 500, items: 1 },
   ]);
 
   const [theme, setTheme] = useState("light");
 
   const increment = (id) => {
-    setProducts(
-      products.map((product) =>
-        product.id === id ? { ...product, count: product.count + 1 } : product
-      )
-    );
+    const newProducts = products.map((product) => {
+      if (product.id === id) {
+        product.items += 1;
+      }
+      return product;
+    });
+    setProducts(newProducts);
   };
 
   const decrement = (id) => {
-    setProducts(
-      products.map((product) =>
-        product.id === id && product.count > 0
-          ? { ...product, count: product.count - 1 }
-          : product
-      )
-    );
+    const newProducts = products.map((product) => {
+      if (product.id === id && product.items > 1) {
+        product.items -= 1;
+      }
+      return product;
+    });
+    setProducts(newProducts);
   };
 
   const changeTheme = () => {
@@ -37,7 +48,41 @@ const App = () => {
   };
 
   const reset = () => {
-    setProducts(products.map((product) => ({ ...product, count: 0 })));
+    if (products.length !== 0) {
+      const newProducts = products.map((product) => {
+        product.items = 1;
+        return product;
+      });
+      setProducts(newProducts);
+    } else {
+      setProducts([
+        { id: 0, name: "shipcy", price: 100, items: 1 },
+        { id: 1, name: "pesi", price: 200, items: 1 },
+        { id: 2, name: "molto", price: 300, items: 1 },
+        { id: 3, name: "kranshy", price: 400, items: 1 },
+        { id: 4, name: "cigaretes", price: 500, items: 1 },
+      ]);
+    }
+  };
+
+  const delAll = () => {
+    setProducts([]);
+  };
+
+  const delProduct = (id) => {
+    const newProducts = products.filter((product) => product.id !== id);
+    setProducts(newProducts);
+  };
+
+  const addItem = (name) => {
+    const newProduct = copyProducts.find((product) => product.name === name);
+    const updatedProducts = products.map((product) => {
+      if (product.name === newProduct.name) {
+        product.items += 1;
+      }
+      return product;
+    });
+    setProducts(updatedProducts);
   };
 
   return (
@@ -48,7 +93,7 @@ const App = () => {
           path='/'
           element={
             <>
-              <Header />
+              <Header products={products} addItem={addItem} />
               <Cart
                 products={products}
                 increment={increment}
@@ -56,6 +101,8 @@ const App = () => {
                 reset={reset}
                 changeTheme={changeTheme}
                 theme={theme}
+                delAll={delAll}
+                delProduct={delProduct}
               />
             </>
           }

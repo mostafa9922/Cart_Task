@@ -1,8 +1,9 @@
 export const Proudect = ({
-  product: { id, name, price, count },
+  product: { id, name, price, items },
   increment,
   decrement,
   theme,
+  delProduct,
 }) => {
   return (
     <div
@@ -12,7 +13,7 @@ export const Proudect = ({
       <h1>ID : {id}</h1>
       <h1>Name : {name}</h1>
       <h1>Price : {price}</h1>
-      <h1>Count : {count}</h1>
+      <h1>Items : {items}</h1>
       <button
         className='btn btn-success btn-xs md:btn-md'
         onClick={() => increment(id)}>
@@ -23,8 +24,12 @@ export const Proudect = ({
         onClick={() => decrement(id)}>
         -
       </button>
-      <button className='btn btn-error btn-xs md:btn-md'>Del</button>
-      <h1>Total : ${count * price}</h1>
+      <button
+        className='btn btn-error btn-xs md:btn-md'
+        onClick={() => delProduct(id)}>
+        Del
+      </button>
+      <h1>Total : ${items * price}</h1>
     </div>
   );
 };
