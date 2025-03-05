@@ -76,12 +76,16 @@ const App = () => {
 
   const addItem = (name) => {
     const newProduct = copyProducts.find((product) => product.name === name);
+    const newProduct1 = products.find((product) => product.name === name);
     const updatedProducts = products.map((product) => {
       if (product.name === newProduct.name) {
         product.items += 1;
       }
       return product;
     });
+    if (newProduct1 === undefined) {
+      updatedProducts.push(newProduct );
+    }
     setProducts(updatedProducts);
   };
 
