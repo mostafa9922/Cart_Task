@@ -71,6 +71,12 @@ const App = () => {
 
   const delProduct = (id) => {
     const newProducts = products.filter((product) => product.id !== id);
+    const newProducts1 = products.map((product) => {
+      if (product.id === id) {
+        product.items = 1;
+      }
+      return product;
+    });
     setProducts(newProducts);
   };
 
@@ -84,7 +90,7 @@ const App = () => {
       return product;
     });
     if (newProduct1 === undefined) {
-      updatedProducts.push(newProduct );
+      updatedProducts.push(newProduct);
     }
     setProducts(updatedProducts);
   };
